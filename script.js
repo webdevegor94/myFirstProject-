@@ -8,12 +8,13 @@ console.log(splits);
 let screenPrice = 256 + " рублей";
 console.log(screenPrice);
 let rollback = 27;
+rollback = rollback / 100;
+console.log(rollback);
 let fullPrice = 20 + " долларов";
 console.log(fullPrice);
+console.log(fullPrice[0] * rollback);
 let adaptive = true;
 
-let a = fullPrice * (rollback / 100);
-console.log(a);
 
 
 
