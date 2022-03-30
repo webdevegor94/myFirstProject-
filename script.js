@@ -1,27 +1,61 @@
-let rollback = 20;//процент отката от fullPrice
-let title = prompt("Как называется ваш проект?", "Web google")
+'use strict'
+
+let title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки")
 let screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные")
 let screenPrice = Math.abs(Number(prompt("Сколько будет стоить данная работа?", "12000")))
 let adaptive = confirm("Нужен ли адаптив на сайте?")
 let service1 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать галлерею")
 let servicePrice1 = Math.abs(Number(prompt("Сколько это будет стоить?", "1500")));
 let service2 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать по PP")
+let rollback = 20;
 let servicePrice2 = Math.abs(Number(prompt("Сколько это будет стоить?", "3000")));
-let fullPrice = screenPrice + servicePrice1 + servicePrice2
-let rollbackPrice = fullPrice * (rollback / 100)
-let servicePercentPrice = fullPrice - Math.ceil(rollbackPrice)
+let fullPrice
+let rollbackPrice
+let servicePercentPrice
+let allServicePrices
 
-if (fullPrice >= 30000) {
-    alert("Даем скидку 10%");
-} else if (15000 >= fullPrice < 30000) {
-    alert("Даем скидку 5%");
-} else if (0 >= fullPrice < 15000) {
-    alert("Скидка не предусмотрена");
+const getRollbeckMessage = function (price) {
+    if (price >= 30000) {
+        return "Даем скидку 10%";
+    } else if (15000 >= price < 30000) {
+        return "Даем скидку 5%";
+    } else if (0 >= price < 15000) {
+        return "Скидка не предусмотрена";
+    } else {
+        return "Что-то пошло не так"
+    }
 }
+// declaretion
+const getAllServicePrices = function () {
+    return servicePrice1 + servicePrice2
+}
+// expreshion
+function getFullPrice() {
+    return screenPrice + allServicePrices
+}
+
+const getTitle = function () {
+    return title.trim().charAt(0).toUpperCase() + title.trim().slice(1)
+}
+
+const getRollbackPrice = function () {
+    return fullPrice * (rollback / 100)
+}
+
+const getServicePercentPrices = function () {
+    return fullPrice - rollbackPrice
+}
+
+
+allServicePrices = getAllServicePrices() // 1 пункт
+fullPrice = getFullPrice() // 2 пункт
+title = getTitle() // 3 пункт 
+rollbackPrice = getRollbackPrice()
+servicePercentPrice = getServicePercentPrices() // 4пункт
 
 console.log(JSON.stringify({
     title,
-    screens,
+    screens, // 5 пункт
     screenPrice,
     adaptive,
     service1,
@@ -30,8 +64,10 @@ console.log(JSON.stringify({
     servicePrice2,
     fullPrice,
     rollbackPrice,
-    servicePercentPrice
-
+    servicePercentPrice, // 5 пункт
+    allServicePrices,
+    getRollbeckMessage: getRollbeckMessage(fullPrice), // 5 пункт 
+    showTypeOf: 'не было в задании' // 5 пункт
 }, null, 4))
 
 
@@ -39,20 +75,3 @@ console.log(JSON.stringify({
 
 
 
-// Усложненное задание ()
-
-// let lang = 'en';
-// if (lang === 'ru') {
-//     console.log("Дни недели выводятся на русском")
-// } else {
-//     console.log("Дни недели выводяся на английском")
-// }
-
-// switch (lang) {
-//     case 'ru':
-//         console.log("Неделя на русском")
-//         break;
-//     case 'en':
-//         console.log("Неделя на английском")
-//         break;
-// }
