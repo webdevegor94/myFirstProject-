@@ -14,6 +14,10 @@ let rollbackPrice
 let servicePercentPrice
 let allServicePrices
 
+const showTypeOf = function (variable) {
+    console.log(variable, typeof variable)
+}
+
 const getRollbeckMessage = function (price) {
     if (price >= 30000) {
         return "Даем скидку 10%";
@@ -67,9 +71,11 @@ console.log(JSON.stringify({
     servicePercentPrice, // 5 пункт
     allServicePrices,
     getRollbeckMessage: getRollbeckMessage(fullPrice), // 5 пункт 
-    showTypeOf: 'не было в задании' // 5 пункт
-}, null, 4))
 
+}, null, 4))
+showTypeOf(title)
+showTypeOf(screenPrice)
+showTypeOf(adaptive)
 
 
 
