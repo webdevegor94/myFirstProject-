@@ -39,7 +39,7 @@ function getFullPrice() {
 }
 
 const getTitle = function () {
-    return title.trim().charAt(0).toUpperCase() + title.trim().slice(1)
+    return title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase()
 }
 
 const getRollbackPrice = function () {
