@@ -12,26 +12,31 @@ let allServicePrices
 let service1
 let service2
 
-const isNumber = function (num, sum) {
-    return !isNaN(parseFloat(num, sum)) && isFinite(num, sum)
+const isNumber = function (num) {
+    return !isNaN(parseFloat(num)) && isFinite(num)
 }
 
 
 
 const asking = function () {
-    title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки")
-    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные")
-    screenPrice = prompt("Сколько будет стоить данная работа?")
+    title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки") // string
+    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные") // string
+    // screenPrice = prompt("Сколько будет стоить данная работа?1") // number
 
     // while (!isNumber(screenPrice)) {
-    //     screenPrice = prompt("Сколько будет стоить данная работа?")
+    //     screenPrice = prompt("Сколько будет стоить данная работа?2")
     // }
-    do
+    do {
         screenPrice = prompt("Сколько будет стоить данная работа?")
+        console.log(screenPrice)
+    }
     while (!isNumber(screenPrice))
+    screenPrice = Number(screenPrice)
+
 
     adaptive = confirm("Нужен ли адаптив на сайте?")
 }
+
 
 
 const getRollbeckMessage = function (price) {
@@ -47,21 +52,33 @@ const getRollbeckMessage = function (price) {
 }
 // declaretion
 const getAllServicePrices = function () {
-    let sum = 0
+    // let sum = 0
+    let servicePrice1
+    let servicePrice2
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
+
             service1 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать галлерею")
+
+            while (!isNumber(servicePrice1)) {
+                servicePrice1 = prompt("Сколько это будет стоить?")
+            }
         } else if (i === 1) {
             service2 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать по PP")
+
+            while (!isNumber(servicePrice2)) {
+                servicePrice2 = prompt("Сколько это будет стоить?")
+            }
         }
 
-        sum = prompt("Сколько это будет стоить?")
 
-        while (!isNumber(sum)) {
-            sum = prompt("Сколько это будет стоить?")
-        }
+        // sum = prompt("Сколько это будет стоить?")
+
+        // while (!isNumber(sum) || sum === 0) {
+        //     sum += +prompt("Сколько это будет стоить?")
+        // }
     }
-    return Math.round(sum)
+    return Number(servicePrice1) + Number(servicePrice2)
 }
 
 const showTypeOf = function (variable) {
@@ -100,7 +117,7 @@ showTypeOf(adaptive)
 
 console.log(JSON.stringify({
     title,
-    screens, // 5 пункт
+    screens,
     screenPrice,
     adaptive,
     service1,
@@ -109,9 +126,9 @@ console.log(JSON.stringify({
     // servicePrice2,
     fullPrice,
     rollbackPrice,
-    servicePercentPrice, // 5 пункт
+    servicePercentPrice,
     allServicePrices,
-    getRollbeckMessage: getRollbeckMessage(fullPrice), // 5 пункт 
+    getRollbeckMessage: getRollbeckMessage(fullPrice),
     // sum
 
 }, null, 4))
