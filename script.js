@@ -1,22 +1,38 @@
 'use strict'
 
-let title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки")
-let screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные")
-let screenPrice = Math.abs(Number(prompt("Сколько будет стоить данная работа?", "12000")))
-let adaptive = confirm("Нужен ли адаптив на сайте?")
-let service1 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать галлерею")
-let servicePrice1 = Math.abs(Number(prompt("Сколько это будет стоить?", "1500")));
-let service2 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать по PP")
+let title
+let screens
+let screenPrice
+let adaptive
 let rollback = 20;
-let servicePrice2 = Math.abs(Number(prompt("Сколько это будет стоить?", "3000")));
 let fullPrice
 let rollbackPrice
 let servicePercentPrice
 let allServicePrices
+let service1
+let service2
 
-const showTypeOf = function (variable) {
-    console.log(variable, typeof variable)
+const isNumber = function (num, sum) {
+    return !isNaN(parseFloat(num, sum)) && isFinite(num, sum)
 }
+
+
+
+const asking = function () {
+    title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки")
+    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные")
+    screenPrice = prompt("Сколько будет стоить данная работа?")
+
+    // while (!isNumber(screenPrice)) {
+    //     screenPrice = prompt("Сколько будет стоить данная работа?")
+    // }
+    do
+        screenPrice = prompt("Сколько будет стоить данная работа?")
+    while (!isNumber(screenPrice))
+
+    adaptive = confirm("Нужен ли адаптив на сайте?")
+}
+
 
 const getRollbeckMessage = function (price) {
     if (price >= 30000) {
@@ -31,8 +47,27 @@ const getRollbeckMessage = function (price) {
 }
 // declaretion
 const getAllServicePrices = function () {
-    return servicePrice1 + servicePrice2
+    let sum = 0
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            service1 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать галлерею")
+        } else if (i === 1) {
+            service2 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать по PP")
+        }
+
+        sum = prompt("Сколько это будет стоить?")
+
+        while (!isNumber(sum)) {
+            sum = prompt("Сколько это будет стоить?")
+        }
+    }
+    return Math.round(sum)
 }
+
+const showTypeOf = function (variable) {
+    console.log(variable, typeof variable)
+}
+
 // expreshion
 function getFullPrice() {
     return screenPrice + allServicePrices
@@ -50,12 +85,18 @@ const getServicePercentPrices = function () {
     return fullPrice - rollbackPrice
 }
 
-
-allServicePrices = getAllServicePrices() // 1 пункт
-fullPrice = getFullPrice() // 2 пункт
-title = getTitle() // 3 пункт 
+asking()
+allServicePrices = getAllServicePrices()
+fullPrice = getFullPrice()
+title = getTitle()
 rollbackPrice = getRollbackPrice()
-servicePercentPrice = getServicePercentPrices() // 4пункт
+servicePercentPrice = getServicePercentPrices()
+
+showTypeOf(title)
+showTypeOf(screenPrice)
+showTypeOf(adaptive)
+
+
 
 console.log(JSON.stringify({
     title,
@@ -63,21 +104,17 @@ console.log(JSON.stringify({
     screenPrice,
     adaptive,
     service1,
-    servicePrice1,
+    // servicePrice1,
     service2,
-    servicePrice2,
+    // servicePrice2,
     fullPrice,
     rollbackPrice,
     servicePercentPrice, // 5 пункт
     allServicePrices,
     getRollbeckMessage: getRollbeckMessage(fullPrice), // 5 пункт 
+    // sum
 
 }, null, 4))
-showTypeOf(title)
-showTypeOf(screenPrice)
-showTypeOf(adaptive)
-
-
 
 
 
