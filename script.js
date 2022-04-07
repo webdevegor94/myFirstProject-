@@ -21,18 +21,13 @@ const isNumber = function (num) {
 const asking = function () {
     title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки") // string
     screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные") // string
-    // screenPrice = prompt("Сколько будет стоить данная работа?1") // number
 
-    // while (!isNumber(screenPrice)) {
-    //     screenPrice = prompt("Сколько будет стоить данная работа?2")
-    // }
     do {
         screenPrice = prompt("Сколько будет стоить данная работа?")
         console.log(screenPrice)
     }
     while (!isNumber(screenPrice))
     screenPrice = Number(screenPrice)
-
 
     adaptive = confirm("Нужен ли адаптив на сайте?")
 }
@@ -71,12 +66,6 @@ const getAllServicePrices = function () {
             }
         }
 
-
-        // sum = prompt("Сколько это будет стоить?")
-
-        // while (!isNumber(sum) || sum === 0) {
-        //     sum += +prompt("Сколько это будет стоить?")
-        // }
     }
     return Number(servicePrice1) + Number(servicePrice2)
 }
@@ -121,9 +110,7 @@ console.log(JSON.stringify({
     screenPrice,
     adaptive,
     service1,
-    // servicePrice1,
     service2,
-    // servicePrice2,
     fullPrice,
     rollbackPrice,
     servicePercentPrice,
