@@ -2,7 +2,7 @@
 
 const appData = {
     title: '',
-    screens: '',
+    screens: [],
     screenPrice: 0,
     adaptive: true,
     rollback: 20,
@@ -10,35 +10,81 @@ const appData = {
     rollbackPrice: 0,
     servicePercentPrice: 0,
     allServicePrices: 0,
-    service1: '',
-    service2: '',
+    services: {},
 
     start: function () {
         appData.asking()
-        appData.allServicePrices = appData.getAllServicePrices()
-        appData.fullPrice = appData.getFullPrice()
-        appData.title = appData.getTitle()
-        appData.rollbackPrice = appData.getRollbackPrice()
-        appData.servicePercentPrice = appData.getServicePercentPrices()
+        appData.addPrice()
+        appData.getFullPrice()
+        appData.getTitle()
+        appData.getRollbackPrice()
+        appData.getServicePercentPrices()
+
         appData.logger()
-    },
-
-    asking: function () {
-        appData.title = prompt("Как называется ваш проект?", " каЛьКулятор Верстки") // string
-        appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные") // string
-
-        do {
-            appData.screenPrice = prompt("Сколько будет стоить данная работа?")
-            // console.log(appData.screenPrice)
-        }
-        while (!appData.isNumber(appData.screenPrice))
-        appData.screenPrice = Number(appData.screenPrice)
-
-        appData.adaptive = confirm("Нужен ли адаптив на сайте?")
     },
 
     isNumber: function (num) {
         return !isNaN(parseFloat(num)) && isFinite(num)
+    },
+
+    asking: function () {
+        //справшивать пока ввел не строку 
+        do {
+            appData.title = prompt('Как называется ваш проект?', 'Калькулятор верстки')
+        }
+        while (appData.isNumber(appData.title))
+
+
+        for (let i = 0; i < 2; i++) {
+            // спрашивать пока ввел не строку 
+            // string
+            let name
+            let price = 0
+            do {
+                name = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные")
+            }
+            while (appData.isNumber(name))
+
+            do {
+                //спрашивать пока не число +
+                price = prompt("Сколько будет стоить данная работа?")
+                // console.log(appData.screenPrice)
+            }
+            while (!appData.isNumber(price))
+            // appData.screenPrice = Number(appData.screenPrice) 
+            appData.price = Number(appData.price)
+            appData.screens.push({ id: i, name: name, price: price })
+
+        }
+
+
+        for (let i = 0; i < 2; i++) {
+            //справшивать пока ввел не строку 
+            let name
+            let price = 0
+            do {
+                name = prompt("Какой дополнительный тип услуги нужен?", "Сверстать галлерею")
+            }
+            while (appData.isNumber(name))
+
+            do {
+                ////спрашивать пока не число +
+                price = prompt('Сколько это будет стоить')
+            } while (!appData.isNumber(price))
+            // Уникальное имя
+            appData.services[name] = +price
+        }
+
+        appData.adaptive = confirm("Нужен ли адаптив на сайте?")
+    },
+
+    addPrice: function () {
+        for (let screen of appData.screens) {
+            appData.screenPrice = appData.screenPrice + screen.price; // сделать с помощью reduce
+        }
+        for (let key in appData.services) {
+            appData.allServicePrices = appData.allServicePrices + appData.services[key]
+        }
     },
 
     getRollbeckMessage: function (price) {
@@ -53,48 +99,29 @@ const appData = {
         }
     },
 
-    getAllServicePrices: function () {
-        // let sum = 0
-        let servicePrice1
-        let servicePrice2
-        for (let i = 0; i < 2; i++) {
-            if (i === 0) {
-                appData.service1 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать галлерею")
-                while (!appData.isNumber(servicePrice1)) {
-                    servicePrice1 = prompt("Сколько это будет стоить?")
-                }
-            } else if (i === 1) {
-                appData.service2 = prompt("Какой дополнительный тип услуги нужен?", "Сверстать по PP")
-
-                while (!appData.isNumber(servicePrice2)) {
-                    servicePrice2 = prompt("Сколько это будет стоить?")
-                }
-            }
-
-        }
-        return Number(servicePrice1) + Number(servicePrice2)
-    },
-
     getFullPrice() {
-        return appData.screenPrice + appData.allServicePrices
+        appData.fullPrice = appData.screenPrice + appData.allServicePrices
     },
 
     getTitle: function () {
-        return appData.title.trim().charAt(0).toUpperCase() + appData.title.trim().slice(1).toLowerCase()
+        appData.title = appData.title.trim().charAt(0).toUpperCase() + appData.title.trim().slice(1).toLowerCase()
     },
 
     getRollbackPrice: function () {
-        return appData.fullPrice * (appData.rollback / 100)
+        appData.rollbackPrice = Math.round(appData.fullPrice * (appData.rollback / 100))
     },
 
     getServicePercentPrices: function () {
-        return appData.fullPrice - appData.rollbackPrice
+        appData.servicePercentPrice = appData.fullPrice - appData.rollbackPrice
     },
     logger: function () {
         for (let key in appData) {
             console.log('ключ: ' + key + ' значение: ' + appData[key])
+            console.log(appData.screens)
         }
     }
 }
 appData.start()
+
+
 
