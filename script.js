@@ -48,11 +48,11 @@ const appData = {
             do {
                 //спрашивать пока не число +
                 price = prompt("Сколько будет стоить данная работа?")
-                // console.log(appData.screenPrice)
+
             }
             while (!appData.isNumber(price))
-            // appData.screenPrice = Number(appData.screenPrice) 
-            appData.price = Number(appData.price)
+
+            price = Number(price)
             appData.screens.push({ id: i, name: name, price: price })
 
         }
@@ -81,6 +81,7 @@ const appData = {
     addPrice: function () {
         for (let screen of appData.screens) {
             appData.screenPrice = appData.screenPrice + screen.price; // сделать с помощью reduce
+
         }
         for (let key in appData.services) {
             appData.allServicePrices = appData.allServicePrices + appData.services[key]
@@ -101,6 +102,8 @@ const appData = {
 
     getFullPrice() {
         appData.fullPrice = appData.screenPrice + appData.allServicePrices
+
+
     },
 
     getTitle: function () {
@@ -115,9 +118,11 @@ const appData = {
         appData.servicePercentPrice = appData.fullPrice - appData.rollbackPrice
     },
     logger: function () {
+        console.log(appData.screens)
         for (let key in appData) {
-            console.log('ключ: ' + key + ' значение: ' + appData[key])
-            console.log(appData.screens)
+            if (typeof appData[key] !== 'function') {
+                console.log('ключ: ' + key + ' значение: ' + appData[key])
+            }
         }
     }
 }
