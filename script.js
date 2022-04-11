@@ -118,10 +118,13 @@ const appData = {
         appData.servicePercentPrice = appData.fullPrice - appData.rollbackPrice
     },
     logger: function () {
-        console.log(appData.screens)
+
         for (let key in appData) {
-            if (typeof appData[key] !== 'function') {
+            if (typeof appData[key] !== 'function' && typeof appData[key] !== 'object') {
                 console.log('ключ: ' + key + ' значение: ' + appData[key])
+            }
+            if (typeof appData[key] === 'object') {
+                console.log('ключ: ' + key + ' значение: ' + JSON.stringify(appData[key], null, 4))
             }
         }
     }
