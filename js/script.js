@@ -1,4 +1,45 @@
 'use strict'
+const title = document.getElementsByTagName('h1')[0]
+console.log(title)
+
+const buttons = document.getElementsByClassName('handler_btn')
+const calcBtn = buttons[0]
+const resetBtn = buttons[1]
+console.log(buttons)
+console.log(calcBtn)
+console.log(resetBtn)
+
+const plusBtn = document.querySelector('.screen-btn')
+console.log(plusBtn)
+
+const itemsPersent = document.querySelectorAll('.other-items.percent')
+console.log(itemsPersent)
+
+const itemsNumber = document.querySelectorAll('.other-items.number')
+console.log(itemsNumber)
+
+const rollbackInput = document.querySelector('.rollback input')
+console.log(rollbackInput)
+
+const rollbackSpan = document.querySelector('.rollback .range-value')
+console.log(rollbackSpan)
+
+//  актуализировать наименование элементов 
+const screenPriceInput = document.getElementsByClassName('total-input')[0]
+const screensCountInput = document.getElementsByClassName('total-input')[1]
+const allServicePricesInput = document.getElementsByClassName('total-input')[2]
+const fullPriceInput = document.getElementsByClassName('total-input')[3]
+const servicePercentPriceInput = document.getElementsByClassName('total-input')[4]
+console.log(screenPriceInput)
+console.log(screensCountInput)
+console.log(allServicePricesInput)
+console.log(fullPriceInput)
+console.log(servicePercentPriceInput)
+
+let screenElement = document.querySelectorAll('.screen')
+console.log(screenElement)
+
+
 
 const appData = {
     title: '',
@@ -129,7 +170,7 @@ const appData = {
         }
     }
 }
-appData.start()
+// appData.start()
 
 
 
