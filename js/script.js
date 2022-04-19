@@ -81,7 +81,7 @@ const appData = {
                 id: index,
                 name: selectName,
                 price: +select.value * +input.value,
-                count: screenPriceInput
+                count: +input.value
             })
         })
 
