@@ -138,7 +138,7 @@ const appData = {
 
         screenPriceInput.value = this.screenPrice;
         screensCountInput.value = this.screensCount;
-        servicePercentPriceInput.value = this.servicePricesPercent + this.servicePricesNumber;
+        allServicePricesInput.value = this.servicePricesPercent + this.servicePricesNumber;
         fullPriceInput.value = this.fullPrice;
         servicePercentPriceInput.value = this.fullPrice - this.rollbackPrice;
 
@@ -146,7 +146,7 @@ const appData = {
         // screensCountInput.value = this.servicePricesPercent + this.servicePricesNumber
         // fullPriceInput.value = this.fullPrice
         // servicePercentPriceInput.value = this.servicePercentPrice
-        allServicePricesInput.value = Object.values(this.servicesNumber).reduce((a, b) => a + b, 0)
+        // allServicePricesInput.value = Object.values(this.servicesNumber).reduce((a, b) => a + b, 0)
 
     },
 
