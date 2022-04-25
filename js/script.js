@@ -27,6 +27,7 @@ let screenElement = document.querySelectorAll('.screen')
 const appData = {
     title: '',
     screens: [],
+    screensCount: 0,
     screenPrice: 0,
     adaptive: true,
     rollback: 0,
@@ -50,6 +51,7 @@ const appData = {
     reset: function () {
         this.title = ''
         this.screens = []
+        this.screensCount = 0
         this.screenPrice = 0
         this.adaptive = true
         this.rollback = 0
@@ -134,10 +136,16 @@ const appData = {
 
     showResult: function () {
 
-        screenPriceInput.value = this.screenPrice
-        screensCountInput.value = this.servicePricesPercent + this.servicePricesNumber
-        fullPriceInput.value = this.fullPrice
-        servicePercentPriceInput.value = this.servicePercentPrice
+        screenPriceInput.value = this.screenPrice;
+        screensCountInput.value = this.screensCount;
+        servicePercentPriceInput.value = this.servicePricesPercent + this.servicePricesNumber;
+        fullPriceInput.value = this.fullPrice;
+        servicePercentPriceInput.value = this.fullPrice - this.rollbackPrice;
+
+        // screenPriceInput.value = this.screenPrice
+        // screensCountInput.value = this.servicePricesPercent + this.servicePricesNumber
+        // fullPriceInput.value = this.fullPrice
+        // servicePercentPriceInput.value = this.servicePercentPrice
         allServicePricesInput.value = Object.values(this.servicesNumber).reduce((a, b) => a + b, 0)
 
     },
@@ -158,7 +166,7 @@ const appData = {
                 id: index,
                 name: selectName,
                 price: +select.value * +input.value,
-                // count: +input.value
+                count: +input.value
             })
         })
 
